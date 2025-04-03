@@ -7,7 +7,7 @@ import java.util.TreeSet;
 public class Arbol {
 
     // TODO: validacion de los signos en el set
-    
+
     private ArrayList<Nodo> nodos = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
@@ -32,7 +32,7 @@ public class Arbol {
             cola.add(nodoHijo);
             nodos.add(nodoHijo);
         }
-        
+
         while (cola.peek() != null) {
             var nodoPadre = cola.peek();
             cola.remove();
