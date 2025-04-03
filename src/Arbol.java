@@ -41,7 +41,7 @@ public class Arbol {
     }
 
 
-    public void mapear2 () {
+    public void mapearV () {
         System.out.println("Signo del nodo");      
         var nodoPadre = new Nodo(scanner.next(), null);
         nodos.add(nodoPadre);
