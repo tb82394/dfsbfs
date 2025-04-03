@@ -1,27 +1,31 @@
+import java.util.ArrayList;
+
 public class Nodo {
     private String signo;
     private Nodo padre;
-    private Nodo[] hijos = new Nodo[5];
-    private boolean raiz;
-
-    public Nodo(String signo, Nodo padre, boolean raiz) {
-        this.signo = signo;
-        this.padre = padre;
-        this.raiz = raiz;
-    }
+    private ArrayList<Nodo> hijos = new ArrayList<>();
 
     public Nodo(String signo, Nodo padre) {
         this.signo = signo;
         this.padre = padre;
-        this.raiz = false;
+       
     }
 
     public Nodo(String signo) {
         this.signo = signo;
         this.padre = null;
-        this.raiz = true;
     }
 
+    public void agregarHijo (Nodo nodoHijo) {
+        hijos.add(nodoHijo);
+    }
+
+    public void imprimirHijos () {
+        for (Nodo nodo : hijos) {
+            System.out.println("Signo: " + nodo.getSigno());
+            System.out.println("Padre: " + nodo.getPadre().getSigno());
+        }
+    }
     public String getSigno() {
         return signo;
     }
@@ -38,21 +42,12 @@ public class Nodo {
         this.padre = padre;
     }
 
-    public Nodo[] getHijos() {
+    public ArrayList<Nodo> getHijos() {
         return hijos;
     }
 
-    public void setHijos(Nodo[] hijos) {
+    public void setHijos(ArrayList<Nodo> hijos) {
         this.hijos = hijos;
     }
-
-    public boolean isRaiz() {
-        return raiz;
-    }
-
-    public void setRaiz(boolean raiz) {
-        this.raiz = raiz;
-    }
-
     
 }

@@ -1,0 +1,9 @@
+@startuml dfs
+
+start
+:Signo de raiz?;
+:int numHijos = scanner.next();
+:;
+
+
+@enduml
