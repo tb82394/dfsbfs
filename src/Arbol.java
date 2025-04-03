@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -12,9 +11,7 @@ public class Arbol {
     private ArrayList<Nodo> nodos = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    public Arbol() {
-        
-    }
+    public Arbol() {}
 
     public void mapear() {
         Queue<Nodo> cola = new LinkedList<>();
@@ -24,7 +21,7 @@ public class Arbol {
         String simboloNodoRaiz = scanner.next();
         var nodoRaiz = new Nodo(simboloNodoRaiz);
         cola.offer(nodoRaiz);
-        nodosVisitados.add(nodoRaiz.getSigno());
+        nodos.add(nodoRaiz);
         cola.remove(nodoRaiz);
 
         System.out.println("Ingresa los nodos conectados a: " + nodoRaiz.getSigno() + " FORMATO: a,b,c,d,... o 'cero'");
@@ -33,28 +30,30 @@ public class Arbol {
             var nodoHijo = new Nodo(simboloHijo, nodoRaiz);
             nodoRaiz.agregarHijo(nodoHijo);
             cola.add(nodoHijo);
-            nodosVisitados.add(nodoHijo.getSigno());
+            nodos.add(nodoHijo);
         }
+        
         while (cola.peek() != null) {
             var nodoPadre = cola.peek();
+            cola.remove();
+            System.out.println("Ingresa los nodos conectados a: " + nodoPadre.getSigno() + " FORMATO: a,b,c,d,... o 'cero'");
+            String nodosHijosString = scanner.next();
+            if (nodosHijosString.equals("cero")) {
+                continue;
+            }
+            String[] nodosHijos = nodosHijosString.split(",");
+            for (String simboloHijo : nodosHijos) {
+                if (nodosVisitados.contains(simboloHijo)) {
+                    System.out.println("Simbolo Duplicado ? DEBUG");
+                }
+                var nodoHijo = new Nodo(simboloHijo, nodoRaiz);
+                nodoRaiz.agregarHijo(nodoHijo);
+                cola.add(nodoHijo);
+                nodos.add(nodoHijo);
+            }
         }
-    }
-
-
-    public void mapearV () {
-        System.out.println("Signo del nodo");      
-        var nodoPadre = new Nodo(scanner.next(), null);
-        nodos.add(nodoPadre);
-        System.out.println("Numero de hijos del nodo: " + nodoPadre.getSigno());
-        var numHijos = Integer.parseInt(scanner.next());
-        for (int i = 1; i <+ numHijos; i++) {
-            System.out.println("Ingrese signo del hijo numero #" + i);
-                var signoHijo = scanner.next();
-                Nodo nodoHijo = new Nodo(signoHijo, nodoPadre);
-                nodoPadre.agregarHijo(nodoHijo);
-        }
-        for (int i = 0; i < nodoPadre.getHijos().size(); i++) {
-            
+        for (Nodo nodo : nodos) {
+            System.out.print(nodo.getSigno() + ", ");
         }
     }
     
@@ -73,7 +72,4 @@ public class Arbol {
         return nodos;
     }
 
-    public void setNodos(ArrayList<Nodo> nodos) {
-        this.nodos = nodos;
-    }
 }
